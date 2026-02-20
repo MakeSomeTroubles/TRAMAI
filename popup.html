@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 300px; background: #0A0F1E; color: #E2E8F0; font-family: system-ui, sans-serif; padding: 16px; }
+h1 { font-size: 18px; font-weight: 800; background: linear-gradient(135deg, #F472B6, #A78BFA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+.sub { font-size: 10px; color: #475569; margin-bottom: 14px; }
+label { font-size: 11px; font-weight: 600; color: #94A3B8; display: block; margin-bottom: 4px; }
+input { width: 100%; padding: 7px 9px; border-radius: 6px; border: 1px solid #1E293B; background: #0B1120; color: #E2E8F0; font-size: 11px; font-family: monospace; outline: none; }
+.hint { font-size: 9px; color: #475569; margin-top: 4px; }
+.status { display: flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 11px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.section { padding: 10px 0; border-top: 1px solid #111827; margin-top: 10px; }
+.info { font-size: 10px; color: #64748B; line-height: 1.5; }
+a { color: #60A5FA; text-decoration: none; }
+</style>
+</head>
+<body>
+  <h1>LuminaRetouch</h1>
+  <div class="sub">Professional editing for Higgsfield.ai</div>
+
+  <label>Gemini API Key</label>
+  <input type="password" id="gemKey" placeholder="AIzaSy..." />
+  <div class="hint">Get from <a href="https://aistudio.google.com/apikey" target="_blank">Google AI Studio</a></div>
+
+  <div class="status">
+    <div class="dot" id="statusDot" style="background: #FBBF24;"></div>
+    <span id="statusText">Not configured</span>
+  </div>
+
+  <div class="section">
+    <div class="info">
+      <strong style="color: #E2E8F0;">How to use:</strong><br>
+      1. Go to <a href="https://higgsfield.ai" target="_blank">higgsfield.ai</a><br>
+      2. Click the <strong style="color: #A78BFA;">LR</strong> button (bottom-right)<br>
+      3. Choose mode and adjust settings<br>
+      4. Click <strong style="color: #FBBF24;">Insert into Higgsfield</strong><br>
+      5. Or use <strong style="color: #34D399;">Generate Preview</strong> with Gemini
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="info">
+      <strong style="color: #E2E8F0;">Version 1.0.0</strong><br>
+      6 modes • 25+ sub-categories • 35+ tasks<br>
+      Gemini Preview • Nano Banana Pro export
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
