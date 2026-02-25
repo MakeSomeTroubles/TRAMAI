@@ -1,7 +1,8 @@
-@import "tailwindcss";
-@import "@xyflow/react/dist/style.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
+:root {
   /* Surfaces */
   --color-canvas-bg: #0f0f14;
   --color-node-bg: #1a1a24;
