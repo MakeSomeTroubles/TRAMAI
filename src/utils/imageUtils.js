@@ -11,10 +11,15 @@ export function fileToBase64(file) {
 }
 
 /**
- * Clamps a value between min and max.
+ * Gets image dimensions from a data URL.
  */
-export function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max);
+export function getImageDimensions(dataUrl) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve({ width: img.width, height: img.height });
+    img.onerror = () => resolve({ width: 0, height: 0 });
+    img.src = dataUrl;
+  });
 }
 
 /**
@@ -25,11 +30,4 @@ export function formatFileSize(bytes) {
   const sizes = ['B', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
-}
-
-/**
- * Generates a unique ID.
- */
-export function uid() {
-  return crypto.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }

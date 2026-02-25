@@ -1,16 +1,35 @@
-# React + Vite
+# TRAMAI — Personal AI Production Desk
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Node-based AI image generation and editing tool built for art directors.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 18 + Vite
+- React Flow (`@xyflow/react`) — node canvas
+- Tailwind CSS — styling
+- Zustand — state management
+- Lucide React — icons
 
-## React Compiler
+## AI Backends
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Fal.ai** — Flux Pro generation, upscaling, inpainting, face swap
+- **Google AI Studio** — Gemini vision (image description, AD Assist prompt rewriting)
+- **HuggingFace** — Flux Dev, SDXL via Inference API
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+Set API keys in `.env.local`:
+```
+FAL_KEY=your_fal_api_key
+GOOGLE_AI_KEY=your_google_ai_studio_key
+HF_TOKEN=your_huggingface_token
+```
+
+## Deployment
+
+Deploy to Vercel — set environment variables in the Vercel dashboard.
