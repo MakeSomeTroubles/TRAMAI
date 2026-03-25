@@ -1,19 +1,109 @@
 import { create } from 'zustand';
 import { applyNodeChanges, applyEdgeChanges } from '@xyflow/react';
 
+// Default demo layout — shown when no saved workflow exists
+const DEFAULT_NODES = [
+  {
+    id: 'briefNode-1',
+    type: 'briefNode',
+    position: { x: 80, y: 200 },
+    data: {
+      label: 'briefNode',
+      nodeData: {
+        projectName: 'KOVA Coffee',
+        brandName: 'KOVA',
+        targetAudience: 'Urban professionals 28-40',
+        keyMessage: 'Ritual, not routine',
+        moods: ['warm', 'minimal', 'premium'],
+      },
+    },
+  },
+  {
+    id: 'textPromptNode-2',
+    type: 'textPromptNode',
+    position: { x: 450, y: 180 },
+    data: {
+      label: 'textPromptNode',
+      nodeData: {
+        prompt: 'Professional product photography of a matte black coffee bag with minimal gold typography',
+        adAssist: false,
+      },
+    },
+  },
+  {
+    id: 'generateNode-3',
+    type: 'generateNode',
+    position: { x: 800, y: 200 },
+    data: {
+      label: 'generateNode',
+      nodeData: {
+        backend: 'huggingface',
+        aspectRatio: '1:1',
+      },
+    },
+  },
+];
+
+const DEFAULT_EDGES = [
+  {
+    id: 'e-briefNode-1-briefData-textPromptNode-2-briefData',
+    source: 'briefNode-1',
+    sourceHandle: 'briefData',
+    target: 'textPromptNode-2',
+    targetHandle: 'briefData',
+    type: 'smoothstep',
+  },
+  {
+    id: 'e-textPromptNode-2-prompt-generateNode-3-prompt',
+    source: 'textPromptNode-2',
+    sourceHandle: 'prompt',
+    target: 'generateNode-3',
+    targetHandle: 'prompt',
+    type: 'smoothstep',
+  },
+];
+
+// Check if there's a saved workflow in localStorage
+function getInitialState() {
+  try {
+    const saved = localStorage.getItem('tramai_workflow');
+    if (saved) {
+      const workflow = JSON.parse(saved);
+      if (workflow.nodes && workflow.nodes.length > 0) {
+        return {
+          nodes: workflow.nodes,
+          edges: workflow.edges || [],
+          projectName: workflow.projectName || 'Untitled Project',
+          nodeIdCounter: workflow.nodeIdCounter || 3,
+        };
+      }
+    }
+  } catch {
+    // Fall through to defaults
+  }
+  return {
+    nodes: DEFAULT_NODES,
+    edges: DEFAULT_EDGES,
+    projectName: 'KOVA Coffee Campaign',
+    nodeIdCounter: 3,
+  };
+}
+
+const initialState = getInitialState();
+
 const useWorkflowStore = create((set, get) => ({
   // React Flow state
-  nodes: [],
-  edges: [],
+  nodes: initialState.nodes,
+  edges: initialState.edges,
 
   // Workflow metadata
-  projectName: 'Untitled Project',
+  projectName: initialState.projectName,
 
   // Execution state
   executionStatus: 'idle', // 'idle' | 'running' | 'done' | 'error'
 
   // Node counter for unique IDs
-  nodeIdCounter: 0,
+  nodeIdCounter: initialState.nodeIdCounter,
 
   // React Flow handlers
   onNodesChange: (changes) => {

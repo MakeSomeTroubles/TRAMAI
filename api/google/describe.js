@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.GOOGLE_AI_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'GOOGLE_AI_KEY not configured. Add it in Vercel environment variables.' });
+    return res.status(401).json({ error: 'No API key — set GOOGLE_AI_KEY in .env.local', code: 'NO_API_KEY' });
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);

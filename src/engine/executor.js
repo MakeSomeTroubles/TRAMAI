@@ -143,7 +143,7 @@ async function executeNode(node, inputs, updateNodeData) {
         case 'huggingface':
           result = await callBackend('huggingface', 'generate', {
             prompt,
-            model: nodeData.model || 'black-forest-labs/FLUX.1-dev',
+            model: nodeData.model || 'black-forest-labs/FLUX.1-schnell',
             aspect_ratio: aspectRatio,
           });
           break;
