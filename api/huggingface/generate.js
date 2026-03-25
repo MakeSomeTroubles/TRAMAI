@@ -12,6 +12,8 @@ const HF_MODELS = [
 const HF_API_BASE = 'https://router.huggingface.co/hf-inference/models';
 
 export default async function handler(req, res) {
+  console.log('[HF DEBUG] HF_TOKEN present:', !!process.env.HF_TOKEN);
+  console.log('[HF DEBUG] HF_TOKEN length:', process.env.HF_TOKEN?.length);
   console.log('[HF DEBUG] request body:', JSON.stringify(req.body));
 
   if (req.method !== 'POST') {
